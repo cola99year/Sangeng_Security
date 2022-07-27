@@ -10,4 +10,6 @@ import com.cola.sangeng_security.vo.ResponseResult;
 public interface LoginService {
 
     ResponseResult login(User user);
+
+    ResponseResult logout();
 }

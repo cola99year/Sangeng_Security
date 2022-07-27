@@ -46,14 +46,17 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
         //从redis中获取用户信息
         String redisKey = "login:" + userid;
         LoginUser loginUser = (LoginUser) redisUtil.get(redisKey);
+        //如果注销了，Redis数据就被删除，此时抛出异常用户未登录！
         if(Objects.isNull(loginUser)){
             throw new RuntimeException("用户未登录");
         }
-        //存入SecurityContextHolder
+        //存入SecurityContextHolder，
+        // TODO 每次请求都存一次？？？？
         //TODO 获取权限信息封装到Authentication中
         UsernamePasswordAuthenticationToken authenticationToken =
                 new UsernamePasswordAuthenticationToken(loginUser,null,null);
         SecurityContextHolder.getContext().setAuthentication(authenticationToken);
+        //SecurityContextHolder.getContext().getAuthentication()
         //放行
         filterChain.doFilter(request, response);
     }
