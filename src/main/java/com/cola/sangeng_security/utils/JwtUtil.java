@@ -19,7 +19,7 @@ public class JwtUtil {
     //有效期为
     public static final Long JWT_TTL = 60 * 60 *1000L;// 60 * 60 *1000ms  一个小时
     //设置秘钥明文
-    public static final String JWT_KEY = "sangeng";
+    public static final String JWT_KEY = "cola666";
 
     public static String getUUID(){
         String token = UUID.randomUUID().toString().replaceAll("-", "");
@@ -60,7 +60,7 @@ public class JwtUtil {
         return Jwts.builder()
                 .setId(uuid)              //唯一的ID
                 .setSubject(subject)   // 主题  可以是JSON数据
-                .setIssuer("sg")     // 签发者
+                .setIssuer("cola")     // 签发者cola
                 .setIssuedAt(now)      // 签发时间
                 .signWith(signatureAlgorithm, secretKey) //使用HS256对称加密算法签名, 第二个参数为秘钥
                 .setExpiration(expDate);
@@ -78,10 +78,18 @@ public class JwtUtil {
         return builder.compact();
     }
 
+    //todo main方法
     public static void main(String[] args) throws Exception {
-        String token = "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiJjYWM2ZDVhZi1mNjVlLTQ0MDAtYjcxMi0zYWEwOGIyOTIwYjQiLCJzdWIiOiJzZyIsImlzcyI6InNnIiwiaWF0IjoxNjM4MTA2NzEyLCJleHAiOjE2MzgxMTAzMTJ9.JVsSbkP94wuczb4QryQbAke3ysBDIL5ou8fWsbt_ebg";
+        //加密(比如我参数只拿id = 1 加密)
+        String token = createJWT("1");
+        System.out.println(token);
+        //解密
         Claims claims = parseJWT(token);
+        //jti=764d8f3b15eb422e8de1e74af31b4c98,【唯一id】 sub=1,【密码】
+        // iss=cola,【签发者】 iat=1658840812,【签发时间】 exp=1658844412【到期时间】}
         System.out.println(claims);
+        //密码
+        System.out.println(claims.getSubject()); //1
     }
 
     /**

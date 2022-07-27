@@ -1,4 +1,4 @@
-package com.cola.sangeng_security.service;
+package com.cola.sangeng_security.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.cola.sangeng_security.mapper.UserMapper;
