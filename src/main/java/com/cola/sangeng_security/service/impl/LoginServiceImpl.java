@@ -30,7 +30,8 @@ public class LoginServiceImpl implements LoginService {
     @Override
     public ResponseResult login(User user) {
         //Authentication是接口的实现类，封装用户密码返回Authentication类型的参数
-        UsernamePasswordAuthenticationToken authenticationToken = new  						                        UsernamePasswordAuthenticationToken(user.getUserName(),user.getPassword());
+        UsernamePasswordAuthenticationToken authenticationToken =
+                new UsernamePasswordAuthenticationToken(user.getUserName(),user.getPassword());
         //authenticationManager接口调用authenticate方法，方法返回的是Authentication对象，需要Authentication类型的参数。
         //Authentication是接口，使用这个接口的实现类来把用户的账号密码封装成这个类型的参数。供authenticationManager接口的authenticate方法调用
         Authentication authenticate = authenticationManager.authenticate(authenticationToken);

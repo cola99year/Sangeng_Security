@@ -1,10 +1,12 @@
 package com.cola.sangeng_security.config;
 
 import com.cola.sangeng_security.utils.FastJsonRedisSerializer;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.serializer.RedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 
 /**
@@ -14,6 +16,9 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
 
 @Configuration
 public class RedisConfig {
+
+    @Autowired
+    private RedisConnectionFactory factory;
 
     @Bean
     @SuppressWarnings(value = { "unchecked", "rawtypes" })
